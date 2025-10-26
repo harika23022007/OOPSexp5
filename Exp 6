@@ -1,0 +1,93 @@
+import java.util.Scanner;
+interface Transaction{ 
+ void deposit(double amount); 
+ void withdraw(double amount); 
+ void view Balance(); 
+ void view Account Details(); 
+} 
+abstract class Account{ 
+ protected String  acc _ name; 
+ protected String cc _no; 
+ protected double balance; 
+ public Account(String ac c_ name, String cc_ no, double balance){ 
+ this.acc_name=acc_name; 
+ this.cc_no=cc_no; 
+ this.balance=balance; 
+ } 
+} 
+class Bank extends Account implements Transaction{ 
+ public Bank(String acc_name, String cc_no, double balance){ 
+ super(acc_name,cc_no,balance); 
+ } 
+ public void deposit(double amount){ 
+ if(amount>0){ 
+ balance+=amount; 
+ System.out.println("$"+amount+"deposited Successfully.")
+
+
+ }else{ 
+ System.out.println("Invalid deposit amount."); 
+ } 
+ } 
+ public void withdraw(double amount){ 
+ if (amount>0$$amount<=balance){ 
+ balance-=amount; 
+ System.out.println("$"+amount+"withdraw successfully."); 
+ }else if(amount>balance){ 
+ System.out.println("Insufficient balance."); 
+ }else{ 
+ System.out.println("Invalid withdrwal amount."); 
+ } 
+ } 
+ public void viewBalance(){ 
+ System.out.println("Current Balance: $"+balance); 
+ } 
+ public void viewAccountDetails(){ 
+ System.out.println("Account Holder Name:"+acc_name); 
+ System.out.println("Account Number:"+cc_no); 
+ System.out.println("Balance:$"+balance); 
+ } 
+} 
+public class BankingApp{ 
+public static void main(String[]args){ 
+Scanner scanner=new Scanner(System.in); 
+Bank customer=new Bank("Priya Sharma","ACC123456789",1000.0); 
+int choice; 
+do{ 
+ System.out.println("\n---Banking Operation Menu---"); 
+ System.out.println("1. Deposit"); 
+ System.out.println("2. Withdraw"); 
+ System.out.println("3. view Balance"); 
+ System.out.println("4. view Account Details");
+
+
+ System.out.println("5. Exit"); 
+ System.out.println("Enter your choice: "); 
+ choice=scanner.nextInt(); 
+ switch(choice) { 
+ case 1: 
+ System.out.print("Enter deposit amount:$"); 
+ double depositAmount=scanner.nextDouble(); 
+ customer.deposit(depositAmount); 
+ break; 
+ case 2: 
+ System.out.print("Enter withdrawal amount: $"); 
+ double withdrawAmount=scanner.nextDouble(); 
+ customer.withdraw(withdrawAmount); 
+ break; 
+ case 3: 
+ customer.viewBalance(); 
+ break; 
+ case 4: 
+ customer.viewAccountDetails(); 
+ break; 
+ case 5: 
+System.out.println("Thank you for banking with us!"); 
+break; 
+ default: 
+System.out.println("Invalid choice. Please try again."); 
+} 
+ } while(choice!=5); 
+ scanner.close(); 
+} 
+} 
